@@ -1,16 +1,14 @@
 # Marketing Analytics Dashboard
 
-## Demo Video
+## 🎥 Demo Video
 
 <div align="center">
 
-<iframe width="900" height="500"
-src="https://www.youtube.com/embed/MBdqZB_CI3c"
-title="Marketing Analytics Dashboard Demo"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-allowfullscreen>
-</iframe>
+<a href="https://youtu.be/MBdqZB_CI3c" target="_blank">
+  <img src="https://img.youtube.com/vi/MBdqZB_CI3c/maxresdefault.jpg" 
+       alt="Marketing Analytics Dashboard Demo"
+       width="800">
+</a>
 
 </div>
 
