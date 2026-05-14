@@ -1,0 +1,193 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-surface-50: oklch(0.985 0.002 247);
+  --color-surface-100: oklch(0.965 0.005 260);
+  --color-surface-200: oklch(0.92 0.012 260);
+  --color-surface-800: oklch(0.23 0.03 260);
+  --color-surface-900: oklch(0.18 0.035 265);
+  --color-surface-950: oklch(0.13 0.04 270);
+
+  --color-accent: oklch(0.52 0.12 180);
+  --color-accent-deep: oklch(0.45 0.14 185);
+  --color-accent-muted: oklch(0.58 0.1 195);
+
+  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.05), 0 22px 52px -28px rgb(15 23 42 / 0.16);
+  --shadow-card:
+    0 1px 0 rgb(15 23 42 / 0.04), 0 16px 44px -22px rgb(15 23 42 / 0.11),
+    0 0 0 1px rgb(15 118 110 / 0.04);
+  --shadow-glow:
+    0 0 0 1px rgb(13 148 136 / 0.12), 0 22px 56px -26px rgb(13 148 136 / 0.28);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+@keyframes shimmer-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes mesh-drift {
+  0% {
+    opacity: 0.85;
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.06) translate(1.5%, -1.5%);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(1%, -2%) scale(1.03);
+  }
+}
+
+@keyframes pulse-bar {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Main content: layered mesh — subtle enterprise polish */
+.app-canvas {
+  position: relative;
+  isolation: isolate;
+}
+
+.app-canvas::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 88% 58% at 12% -12%, rgb(20 184 166 / 0.14), transparent 52%),
+    radial-gradient(ellipse 72% 48% at 94% 6%, rgb(6 182 212 / 0.11), transparent 48%),
+    radial-gradient(ellipse 58% 38% at 52% 108%, rgb(14 165 233 / 0.07), transparent 45%);
+  animation: mesh-drift 22s ease-in-out infinite alternate;
+}
+
+.dark .app-canvas::before {
+  background:
+    radial-gradient(ellipse 88% 58% at 10% -16%, rgb(45 212 191 / 0.13), transparent 52%),
+    radial-gradient(ellipse 72% 48% at 96% 4%, rgb(34 211 238 / 0.11), transparent 48%),
+    radial-gradient(ellipse 58% 38% at 48% 112%, rgb(56 189 248 / 0.09), transparent 45%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-canvas::before {
+    animation: none;
+  }
+
+  .animate-shimmer-bar {
+    animation: none !important;
+  }
+
+  .sidebar-glow {
+    animation: none !important;
+  }
+}
+
+/* Navbar accent line */
+.nav-accent-line {
+  position: relative;
+}
+
+.nav-accent-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(20 184 166 / 0.38) 22%,
+    rgb(6 182 212 / 0.5) 50%,
+    rgb(20 184 166 / 0.38) 78%,
+    transparent 100%
+  );
+  opacity: 0.85;
+  pointer-events: none;
+  animation: pulse-bar 4s ease-in-out infinite;
+}
+
+.dark .nav-accent-line::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(45 212 191 / 0.45) 22%,
+    rgb(34 211 238 / 0.55) 50%,
+    rgb(45 212 191 / 0.45) 78%,
+    transparent 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-accent-line::after {
+    animation: none;
+  }
+}
+
+.animate-shimmer-bar {
+  animation: shimmer-slide 1.45s ease-in-out infinite;
+}
+
+.sidebar-glow {
+  animation: float-soft 16s ease-in-out infinite;
+}
+
+/* Recharts default text inherits */
+.recharts-cartesian-axis-tick-value {
+  font-size: 11px;
+  fill: #64748b;
+}
+
+.dark .recharts-cartesian-axis-tick-value {
+  fill: #94a3b8;
+}
+
+.recharts-legend-item-text {
+  font-size: 12px !important;
+  color: #475569 !important;
+}
+
+.dark .recharts-legend-item-text {
+  color: #cbd5e1 !important;
+}

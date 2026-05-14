@@ -1,0 +1,30 @@
+# — Repository root (Rahi monorepo) —
+
+# OS
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Environment & secrets (any subfolder)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs
+*.log
+logs/
+
+# Editors & IDEs
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-*
+
+# Optional: uncomment if you don’t want Cursor workspace metadata in git
+# .cursor/
